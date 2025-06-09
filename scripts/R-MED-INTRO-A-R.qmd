@@ -10,7 +10,7 @@ editor_options:
 author: 
   - "Catalina Cañizares"
   - "Francisco Cardozo"
-date: "2024-10-06"
+date: today
 date-format: "long"
 self-contained: true
 ---
@@ -123,9 +123,9 @@ Un data frame es una colecciónde elementos donde las columnas pueden ser de dif
 
 ```{r}
 mi_data_frame <- data.frame(
-  nombre = c("Ana", "Luis", "Carlos"),
-  edad = c(23, 25, 30),
-  altura = c(160, 175, 168)
+    nombre = c("Ana", "Luis", "Carlos"),
+    edad = c(23, 25, 30),
+    altura = c(160, 175, 168)
 )
 
 print(mi_data_frame)
@@ -139,9 +139,9 @@ Una lista es una colección de elementos que pueden ser de diferentes tipos. Se 
 ```{r}
 
 mi_lista <- list(
-  nombre = "Ana",
-  edad = 23,
-  alturas = c(160, 175, 168)
+    nombre = "Ana",
+    edad = 23,
+    alturas = c(160, 175, 168)
 )
 
 # Mostrando la lista y su tipo de dato
@@ -187,8 +187,8 @@ Crea un data frame con los nombres y edades de 3 personas. Muestra el data frame
 
 ```{r}
 nombres <- data.frame(
-  nombre = c("Matias", "Catalina", "Aura"),
-  edad = c(10, 35, 70)
+    nombre = c("Matias", "Catalina", "Aura"),
+    edad = c(10, 35, 70)
 )
 nombres
 ```
