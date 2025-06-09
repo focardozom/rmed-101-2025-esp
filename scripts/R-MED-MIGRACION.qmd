@@ -86,7 +86,23 @@ library(arrow) # Paquete para leer archivos parquet
 
 ## Importar la base de datos
 
-A continuación, vamos a importar los datos a R y los vamos a guardar en un objeto llamado `atenciones_migrantes`. Para hacer esto, vamos a utilizar la función `read_xlsx()` del paquete `readxl`.
+A continuación, vamos a importar los datos a R y los vamos a guardar en un objeto llamado `atenciones_migrantes`. Para hacer esto, vamos a utilizar la función `read_parquet()` del paquete `arrow`.
+
+:::{.callout-note}
+
+# Nota sobre Parquet
+
+Parquet es un formato de archivo columnar que está optimizado para el almacenamiento y procesamiento de datos. A diferencia de los archivos CSV o Excel, los archivos Parquet:
+
+1. Son más eficientes en términos de almacenamiento ya que comprimen los datos
+2. Permiten un acceso más rápido a columnas específicas
+3. Mantienen el tipo de datos original
+4. Son especialmente útiles para conjuntos de datos grandes
+
+En este caso, estamos utilizando un archivo Parquet porque nuestra base de datos es bastante grande (más de 200 mil registros) y este formato nos permitirá trabajar con ella de manera más eficiente.
+
+:::
+
 
 Para importar los datos y correr el código vamos a crear un chunk. Para crear el chunk con el teclado los usuarios de Mac presionan Option + Command + I, los usuarios de Windows Ctrl + Alt + I
 
@@ -115,7 +131,7 @@ atenciones_migrantes |>
     names()
 ```
 
-Esto `|>` o `%>%` es llamado pipe y debe leerse como y después. 
+Esto `|>` o `%>%` es llamado pipe y puede leerse como: "después". 
 Para crearlo Mac users: Cmd + Shift + M Windows users: Ctrl + Shift + M.
 
 Aunque los nombres son claros, hay algunos problemas. Por ejemplo, los nombres de las columnas contienen espacios y caracteres especiales, lo que puede generar algunos problemas. Además, no se utilizaron de manera consistente las minúsculas y mayúsculas. Es importnate tener un forma de nombrar las variables. Hay diferentes formatos, para más información puede consultar aquí: [naming conventions](https://en.wikipedia.org/wiki/Naming_convention_(programming)#:~:text=The%20choice%20of%20a%20variable,d%2C%20and%20e%20for%20characters.).
@@ -170,7 +186,7 @@ atenciones_migrantes |>
 Para obtener el porcentaje solo para los años 2017, 2019 y 2021, podemos utilizar la función `filter()` para seleccionar solo las filas correspondientes a estos años. Podemos utilizar el operador `%in%` para seleccionar los años de interés. Por ejemplo, `filter(ano %in% c(2017, 2019, 2021))` seleccionará solo las filas correspondientes a los años 2017, 2019 y 2021.
 :::
 
-Una vez construida la tabla de porcentajes, podemos visualizarla en un gráfico. Vamos a utilizar la función `ggplot()` del paquete `ggplot2` para crear un gráfico de lineas que muestre el porcentaje de atenciones prestadas en cada año.
+Una vez construida la tabla de porcentajes, podemos visualizarla en un gráfico. Vamos a utilizar la función `ggplot()` del paquete `ggplot2` para crear un gráfico de líneas que muestre el porcentaje de atenciones prestadas en cada año.
 
 ```{r}
 atenciones_migrantes |>
@@ -277,7 +293,7 @@ atenciones_migrantes |>
     count(tipo_de_servicio)
 ```
 
-Hemos arreglado la opcion consulta, pero aun hay valores repetidos. Por ejemplo, "Vacunas" y "vacunacion" deberían ser considerados como el mismo valor. Para esto, vamos a utilizar la funcion `case_when()` que nos permite reemplazar valores de una columna de acuerdo a una condición. En este caso, vamos a reemplazar "Vacunas" por "Vacunacion". También podemos reemplazar "Quirurgico" por "Proc Quirurgico".
+Hemos arreglado la opción consulta, pero aún hay valores repetidos. Por ejemplo, "Vacunas" y "vacunacion" deberían ser considerados como el mismo valor. Para esto, vamos a utilizar la función `case_when()` que nos permite reemplazar valores de una columna de acuerdo a una condición. En este caso, vamos a reemplazar "Vacunas" por "Vacunacion". También podemos reemplazar "Quirurgico" por "Proc Quirurgico".
 
 ```{r}
 atenciones_migrantes |>
@@ -364,7 +380,7 @@ atenciones_por_servicio |>
     )
 ```
 
-Se observan algunos cambios en la tendencia de algunos servicios. Por ejemplo, una disminución en el uso de laboratorio u un aumento en los procedimientos. Los demás servicios parecen más estables. 
+Se observan algunos cambios en la tendencia de algunos servicios. Por ejemplo, una disminución en el uso de laboratorio y un aumento en los procedimientos quirúrgicos. Los demás servicios parecen más estables. 
 
 ::: {.panel-tabset}
 
@@ -408,7 +424,19 @@ Encontrar el tamaño ideal para su gráfica es un proceso que requiere varios en
 
 Hasta ahora, hemos explorado la base de datos y hemos visualizado los resultados. Ahora, vamos a modelar la información para evaluar diferencias entre hombres y mujeres en los servicios utilizados.
 
-Para hacer esto, vamos a utilizar un modelo de regresión logística en el que la variable predicha será el sexo y la variable predictora será el tipo de servicio. Como la variable sexo es masculino o femenino, R tomará el valor de referencia como femenino. Por lo tanto, si el coeficiente de un tipo de servicio es positivo, significa que es más probable que sea hombre. Si el coeficiente es negativo, significa que es más probable que sea mujer. La categoría "consulta" será la referencia, dado que es la primera categoría en el orden alfabético. Todas estas definiciones pueden ser cambiadas si se desea.
+Para este análisis, implementaremos un modelo de regresión logística donde:
+- Variable respuesta (Y): sexo
+- Variable predictora (X): tipo de servicio
+
+En este modelo:
+- La categoría de referencia para sexo será "femenino" (por defecto en R)
+- La categoría de referencia para tipo de servicio será "consulta" (primera categoría alfabéticamente)
+
+La interpretación de los coeficientes será:
+- Coeficiente positivo: mayor probabilidad de ser hombre
+- Coeficiente negativo: mayor probabilidad de ser mujer
+
+Nota: Estas categorías de referencia pueden modificarse según las necesidades del análisis.
 
 Utilizaremos el paquete `tidymodels` el cual es especializado para el modelamiento de datos y el paquete `gtsummary` para presentar los resultados de manera más amigable.
 
