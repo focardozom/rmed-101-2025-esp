@@ -10,7 +10,6 @@ editor_options:
 author: 
   - "Francisco Cardozo"
   - "Catalina Cañizares"
-  - "Micaela Lembo"
 date: today
 date-format: "long"
 self-contained: true
@@ -60,10 +59,12 @@ Debemos instalar los siguientes paquetes para utilizar sus funciones durante est
 
 ```{r}
 #| eval: false
+install.packages("pak") # Paquete para instalar paquetes
 install.packages("here") # Paquete para gestionar rutas de archivos
 install.packages("tidyverse") # Paquete principal para el análisis de datos
 install.packages("janitor") # Paquete para limpiar la base de datos
 install.packages("readxl") # Paquete para leer archivos excel
+pak::pak("arrow") # Paquete para leer archivos parquet
 ```
 
 
@@ -80,6 +81,7 @@ library(here) # Paquete para gestionar rutas de archivos
 library(tidyverse) # Paquete principal para el análisis de datos
 library(janitor) # Paquete para limpiar la base de datos
 library(readxl) # Paquete para leer archivos excel
+library(arrow) # Paquete para leer archivos parquet
 ```
 
 ## Importar la base de datos
@@ -94,7 +96,8 @@ No estamos familiarizados con la base de datos, por lo que vamos a explorarla un
 
 
 ```{r}
-atenciones_migrantes <- read_xlsx(here("data", "atenciones_migrantes.xlsx"))
+# atenciones_migrantes <- read_xlsx(here("data", "atenciones_migrantes.xlsx"))
+atenciones_migrantes <- read_parquet(here("data", "atenciones_migrantes.parquet"))
 ```
 
 
@@ -280,12 +283,11 @@ Hemos arreglado la opcion consulta, pero aun hay valores repetidos. Por ejemplo,
 atenciones_migrantes |>
     mutate(tipo_de_servicio = str_to_sentence(tipo_de_servicio)) |>
     mutate(
-        tipo_de_servicio =
-            case_when(
-                tipo_de_servicio == "vacunas" ~ "vacunacion",
-                tipo_de_servicio == "quirurgico" ~ "proc quirurgico",
-                .default = tipo_de_servicio
-            )
+        tipo_de_servicio = case_when(
+            tipo_de_servicio == "vacunas" ~ "vacunacion",
+            tipo_de_servicio == "quirurgico" ~ "proc quirurgico",
+            .default = tipo_de_servicio
+        )
     ) |>
     count(tipo_de_servicio)
 ```
@@ -296,18 +298,21 @@ Hay varios tipos de servicios que tienen una frecuencia muy baja y podríamos ag
 atenciones_migrantes |>
     mutate(tipo_de_servicio = str_to_sentence(tipo_de_servicio)) |>
     mutate(
-        tipo_de_servicio =
-            case_when(
-                tipo_de_servicio == "Vacunas" ~ "Vacunacion",
-                tipo_de_servicio == "Quirurgico" ~ "Proc quirurgico",
-                tipo_de_servicio %in% c(
-                    "Derecho de sala", "Estancia", "Honorario",
+        tipo_de_servicio = case_when(
+            tipo_de_servicio == "Vacunas" ~ "Vacunacion",
+            tipo_de_servicio == "Quirurgico" ~ "Proc quirurgico",
+            tipo_de_servicio %in%
+                c(
+                    "Derecho de sala",
+                    "Estancia",
+                    "Honorario",
                     "Imagenologia",
                     "Interconsulta",
                     "Otro procedimiento"
-                ) ~ "Otros",
-                .default = tipo_de_servicio
-            )
+                ) ~
+                "Otros",
+            .default = tipo_de_servicio
+        )
     ) |>
     count(tipo_de_servicio)
 ```
@@ -318,18 +323,21 @@ Ahora que hemos arreglado las  categorías para los servicios prestados, podemos
 atenciones_por_servicio <- atenciones_migrantes |>
     mutate(tipo_de_servicio = str_to_sentence(tipo_de_servicio)) |>
     mutate(
-        tipo_de_servicio =
-            case_when(
-                tipo_de_servicio == "Vacunas" ~ "Vacunacion",
-                tipo_de_servicio == "Quirurgico" ~ "Proc quirurgico",
-                tipo_de_servicio %in% c(
-                    "Derecho de sala", "Estancia", "Honorario",
+        tipo_de_servicio = case_when(
+            tipo_de_servicio == "Vacunas" ~ "Vacunacion",
+            tipo_de_servicio == "Quirurgico" ~ "Proc quirurgico",
+            tipo_de_servicio %in%
+                c(
+                    "Derecho de sala",
+                    "Estancia",
+                    "Honorario",
                     "Imagenologia",
                     "Interconsulta",
                     "Otro procedimiento"
-                ) ~ "Otros",
-                .default = tipo_de_servicio
-            )
+                ) ~
+                "Otros",
+            .default = tipo_de_servicio
+        )
     ) |>
     filter(ano >= 2017 & ano <= 2021) |>
     count(ano, tipo_de_servicio) |>
@@ -340,7 +348,12 @@ Ahora podemos hacer un gráfico que muestre estos resultados.
 
 ```{r}
 atenciones_por_servicio |>
-    ggplot(aes(x = ano, y = porcentaje, group = tipo_de_servicio, color = tipo_de_servicio)) +
+    ggplot(aes(
+        x = ano,
+        y = porcentaje,
+        group = tipo_de_servicio,
+        color = tipo_de_servicio
+    )) +
     geom_line() +
     geom_point() +
     labs(
@@ -413,18 +426,21 @@ datos_modelo <- atenciones_migrantes |>
     mutate(tipo_de_servicio = str_to_sentence(tipo_de_servicio)) |>
     filter(ano >= 2017 & ano <= 2021) |>
     mutate(
-        tipo_de_servicio =
-            case_when(
-                tipo_de_servicio == "Vacunas" ~ "Vacunacion",
-                tipo_de_servicio == "Quirurgico" ~ "Proc quirurgico",
-                tipo_de_servicio %in% c(
-                    "Derecho de sala", "Estancia", "Honorario",
+        tipo_de_servicio = case_when(
+            tipo_de_servicio == "Vacunas" ~ "Vacunacion",
+            tipo_de_servicio == "Quirurgico" ~ "Proc quirurgico",
+            tipo_de_servicio %in%
+                c(
+                    "Derecho de sala",
+                    "Estancia",
+                    "Honorario",
                     "Imagenologia",
                     "Interconsulta",
                     "Otro procedimiento"
-                ) ~ "Otros",
-                .default = tipo_de_servicio
-            )
+                ) ~
+                "Otros",
+            .default = tipo_de_servicio
+        )
     ) |>
     mutate(sexo = factor(sexo)) |>
     sample_n(5000)
@@ -451,7 +467,7 @@ Finalmente, podemos hacer una tabla con el conteo de casos por variables, para t
 
 ```{r}
 datos_modelo |>
-    tbl_cross(tipo_de_servicio, sexo, percent = "col")
+    tbl_cross(tipo_de_servicio, sexo, percent = "column")
 ```
 
 Muchas gracias por la atención y el esfuerzo que han hecho para seguir este taller. Esperamos que haya sido de su agrado y que haya aprendido algo nuevo. Si tiene alguna pregunta o comentario, estamos atentos.
