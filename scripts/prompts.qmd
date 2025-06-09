@@ -1,0 +1,78 @@
+---
+title: "R-Med en Español"
+format: revealjs
+editor: visual
+---
+
+## 💔 ¿Fue amor a primera vista?
+
+**¿Ha utilizado R alguna vez?**  
+😱 ¿Fue un flechazo inmediato o más bien una relación complicada?  
+💌 Y si ya lo usa… ¿cómo se conocieron por primera vez?
+
+![](https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z3c0aXYybGF0MWloNGg1NDhwdWJvZ3l3b2h5Zmh1ZGhveGN2eTUzYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/qpuRIo1p5bQY7Bap7D/giphy.gif)
+
+---
+
+## 😍 ¿Y qué fue lo que le atrajo?
+
+**¿Para qué lo utiliza?**  
+📊 ¿Fue por sus gráficos? ¿Su capacidad de análisis? ¿O simplemente por ser open source y misterioso?
+
+![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzNlejgzNGp4MmkycmhoaGc3ZWlveTdpa3VxdjJwb216ejU0d2xweCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/g01FakEbcUua6yM34a/giphy.gif)
+---
+
+## 🤔 ¿Y si aún no ha caído en sus redes...?
+
+**¿Por qué quiere aprender R?**  
+🌪️ ¿Hay algo que le ha impedido entregarse por completo?  
+¿Es miedo, falta de tiempo… o un amor no correspondido con Excel?
+
+![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExem9hOHJ6ZWl4Zmg1ZTNkazk2aW81a3d4bGRyZTZ3cHZnZmJ3cGEyYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/bMdZu3fG2ZEBO/giphy.gif)
+
+---
+
+## 🌟 ¡Su paquete favorito, por favor!
+
+**¿Cuál es ese paquete que le hace suspirar?**  
+📦 ¿Hay alguno que aún no ha usado pero que le coquetea desde lejos?
+
+![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXgwbm9pOXExbm54ZHI3aWx4YmRlcTB1ZnR6NWRsYmR3b2Npd251cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/C3MXSPtFpVW8d3IdTq/giphy.gif)
+---
+
+## 😇 ¿Qué le falta a R para ser perfecto?
+
+**Sea honesto…**  
+💭 ¿Qué le cambiaría? ¿Qué le añadiría para convertirlo en *el IDEAL*?
+
+![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWFoZjJsbHR1Zmt4OHUzMTBrNGV1dHhtM3hxYnN6djZnM2RyMTlsdiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/d4uMMisS8f3x6F9ox8/giphy.gif)
+
+---
+
+## 🕵️‍♀️ Su truco secreto...
+
+**¿Cuál es esa práctica, truquito o función que siempre le salva el día?**  
+🧙‍♂️ ¡Comparta su magia!
+
+![](https://media.giphy.com/media/v1.Y2lkPTgyYTE0OTNib3Y1a28wZWk2aGZ3NHloazZ6aGp0Zmc2MTcybW5veWo5Yjg3aWM0ZyZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/3ndAvMC5LFPNMCzq7m/giphy.gif)
+---
+
+## 😫 Lo que no ha podido lograr (¡aún!)
+
+**¿Qué sueña con hacer en R, pero aún no ha logrado?**  
+🎯 ¿Un análisis épico? ¿Una app en Shiny? ¿Una visualización que cause lágrimas?
+
+
+![](https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eTNvanBnYnNoNHZ1cWl4NmY0Y2Mzem42dWY1d3ZzYWtsZDJmN2RmNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3otPoULeOfeWLdTYXe/giphy.gif)
+
+---
+
+## 🎭 ¡Confesiones Finales!
+
+**Si R fuera una telenovela... ¿cuál sería el título de su historia con él?**  
+💘 “Entre paréntesis y comillas”  
+💥 “Error en la línea 32”  
+😵‍💫 “Me dejó por Python”  
+¿Otro?
+
+---

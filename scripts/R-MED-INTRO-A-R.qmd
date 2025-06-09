@@ -10,10 +10,9 @@ editor_options:
 author: 
   - "Catalina Cañizares"
   - "Francisco Cardozo"
-date: today
+date: "2024-10-06"
 date-format: "long"
 self-contained: true
----
 ---
 
 # Objetos y Variables en R
@@ -124,9 +123,9 @@ Un data frame es una colecciónde elementos donde las columnas pueden ser de dif
 
 ```{r}
 mi_data_frame <- data.frame(
-    nombre = c("Ana", "Luis", "Carlos"),
-    edad = c(23, 25, 30),
-    altura = c(160, 175, 168)
+  nombre = c("Ana", "Luis", "Carlos"),
+  edad = c(23, 25, 30),
+  altura = c(160, 175, 168)
 )
 
 print(mi_data_frame)
@@ -140,9 +139,9 @@ Una lista es una colección de elementos que pueden ser de diferentes tipos. Se 
 ```{r}
 
 mi_lista <- list(
-    nombre = "Ana",
-    edad = 23,
-    alturas = c(160, 175, 168)
+  nombre = "Ana",
+  edad = 23,
+  alturas = c(160, 175, 168)
 )
 
 # Mostrando la lista y su tipo de dato
@@ -150,9 +149,11 @@ print(mi_lista)
 class(mi_lista)
 ```
 
-## Ejercicio
+## Ejercicios
 
-### Ejercicio 1: Crear un vector
+::: {.panel-tabset}
+
+## Ejercicio 1: Crear un vector
 
 Crea un vector con los números del 1 al 10 y muestra su longitud y tipo.
 
@@ -160,7 +161,20 @@ Crea un vector con los números del 1 al 10 y muestra su longitud y tipo.
 # codigo aquí
 ```
 
-#### Ejercicio 2: Crear un data frame
+## Solución
+
+```{r}
+numeros <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+numeros
+otra_opcion <- c(1:10)
+otra_opcion
+```
+
+:::
+
+::: {.panel-tabset}
+
+## Ejercicio 2: Crear un data frame
 
 Crea un data frame con los nombres y edades de 3 personas. Muestra el data frame.
 
@@ -168,6 +182,20 @@ Crea un data frame con los nombres y edades de 3 personas. Muestra el data frame
 ```{r}
 # Código aquí
 ```
+
+## Solución
+
+```{r}
+nombres <- data.frame(
+  nombre = c("Matias", "Catalina", "Aura"),
+  edad = c(10, 35, 70)
+)
+nombres
+```
+
+
+:::
+
 
 # Resumen
 
